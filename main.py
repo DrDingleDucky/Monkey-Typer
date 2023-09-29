@@ -26,8 +26,7 @@ class Main:
 
     def typer(self):
         while True:
-            if (self.typing and
-                    len(driver.find_element(By.ID, "words").find_element(By.CLASS_NAME, "word").text) != 0):
+            if (self.typing and len(driver.find_element(By.ID, "words").find_element(By.CLASS_NAME, "word").text) != 0):
                 word = [letter for letter in driver.find_element(By.CSS_SELECTOR, ".word.active").text] + [" "]
 
                 for letter in word:
