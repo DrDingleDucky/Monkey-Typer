@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome()
 driver.get("https://monkeytype.com/")
-driver.implicitly_wait(0.5)
+driver.implicitly_wait(3)
 
 class Main:
     def __init__(self):
