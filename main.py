@@ -1,23 +1,13 @@
-import os
 import threading
 import time
 
 from selenium import webdriver
 from selenium.webdriver import ActionChains
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-PATH = os.path.join("driver", "chromedriver.exe")
-options = Options()
-options.add_argument("log-level=3")
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-options.add_experimental_option("detach", True)
-service = Service(executable_path=PATH)
-driver = webdriver.Chrome(service=service, options=options)
-driver.get("https://monkeytype.com")
-driver.implicitly_wait(3)
-
+driver = webdriver.Chrome()
+driver.get("https://monkeytype.com/")
+driver.implicitly_wait(0.5)
 
 class Main:
     def __init__(self):
@@ -48,7 +38,7 @@ class Main:
                     print("failed to start")
             elif command == "stop":
                 self.typing = False
-                print("program stoped")
+                print("program stopped")
             elif command == "quit":
                 print("quitting program")
                 driver.quit()
@@ -65,9 +55,9 @@ class Main:
 
 def main():
     main = Main()
-    typer_thred = threading.Thread(target=main.typer)
-    typer_thred.daemon = True
-    typer_thred.start()
+    typer_thread = threading.Thread(target=main.typer)
+    typer_thread.daemon = True
+    typer_thread.start()
     main.main_loop()
 
 
