@@ -5,7 +5,10 @@ from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
+options = webdriver.ChromeOptions()
+options.add_argument('log-level=3')
+
+driver = webdriver.Chrome(options=options)
 driver.get("https://monkeytype.com/")
 driver.implicitly_wait(3)
 
@@ -44,11 +47,9 @@ class Main:
                 driver.quit()
                 break
             elif command == "help":
-                print("""
-'start' - start typing
-'stop' - stop typing
-'quit' - quit program
-""")
+                print("'start' - start typing")
+                print("'stop' - stop typing")
+                print("'quit' - quit program")
             else:
                 print(f"'{command}' is not recognized")
 
