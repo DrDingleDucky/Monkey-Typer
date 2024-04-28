@@ -2,7 +2,7 @@
 
 Typing bot for <https://monkeytype.com>.
 
-![monkey-type-website.png](README.assets/monkey-type-website.png)
+![monkey-type-website.gif](README.assets/monkey-type-website.gif)
 
 ## Install Dependencies
 
