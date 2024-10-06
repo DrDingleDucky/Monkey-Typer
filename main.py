@@ -8,7 +8,9 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 options.add_argument('log-level=3')
 
-driver = webdriver.Chrome(options=options)
+service = webdriver.ChromeService(executable_path='./chromedriver.exe')
+
+driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://monkeytype.com/")
 driver.implicitly_wait(3)
 
@@ -17,17 +19,25 @@ class Main:
         self.typing = False
         self.delay = 0.01
 
-    def typer(self):
-        while True:
-            if (self.typing and len(driver.find_element(By.ID, "words").find_element(By.CLASS_NAME, "word").text) != 0):
-                word = [letter for letter in driver.find_element(By.CSS_SELECTOR, ".word.active").text] + [" "]
+    def typist(self):
+        try:
+            while True:
+                try:
+                    length = len(driver.find_element(By.ID, "words").find_element(By.CLASS_NAME, "word").text)
+                except:
+                    length = 0
 
-                for letter in word:
-                    ActionChains(driver).send_keys(letter).perform()
-            else:
-                self.typing = False
+                if (self.typing and length != 0):
+                    word = [letter for letter in driver.find_element(By.CSS_SELECTOR, ".word.active").text] + [" "]
 
-            time.sleep(self.delay)
+                    for letter in word:
+                        ActionChains(driver).send_keys(letter).perform()
+                else:
+                    self.typing = False
+
+                time.sleep(self.delay)
+        except:
+            print("Done")
 
     def main_loop(self):
         while True:
@@ -56,9 +66,9 @@ class Main:
 
 def main():
     main = Main()
-    typer_thread = threading.Thread(target=main.typer)
-    typer_thread.daemon = True
-    typer_thread.start()
+    typist_thread = threading.Thread(target=main.typist)
+    typist_thread.daemon = True
+    typist_thread.start()
     main.main_loop()
 
 
