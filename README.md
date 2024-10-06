@@ -19,3 +19,5 @@ Type 'start' in the terminal to start typing.
 Type 'stop' in the terminal to stop typing.
 
 Type 'quit' to exit the program.
+
+Place [`chromedriver.exe`](https://googlechromelabs.github.io/chrome-for-testing/#stable) in root directory.
